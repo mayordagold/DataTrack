@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTrack - Vanilla JS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>DataTrack</h1>
+        <p>Manage your records efficiently</p>
+        
+        <div id="auth-section">
+            <h2 id="auth-title">Login</h2>
+            <form id="auth-form">
+                <input type="text" id="fullName" placeholder="Full Name" style="display: none;">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" id="auth-btn">Login</button>
+            </form>
+            <p id="auth-toggle">Don't have an account? <a href="#" id="toggle-link">Register</a></p>
+        </div>
+
+        <div id="dashboard" style="display: none;">
+            <h2>Dashboard</h2>
+            
+            <div class="record-form">
+                <h3>Add Record</h3>
+                <form id="record-form">
+                    <input type="text" id="title" placeholder="Title" required>
+                    <input type="text" id="category" placeholder="Category">
+                    <input type="number" id="amount" placeholder="Amount" step="0.01">
+                    <textarea id="description" placeholder="Description"></textarea>
+                    <button type="submit">Add Record</button>
+                </form>
+            </div>
+
+            <div class="records-list">
+                <h3>Your Records</h3>
+                <div id="records-container"></div>
+            </div>
+
+            <button id="logout-btn">Logout</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 DataTrack. Designed by Olumayowa Oginni.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/records.js"></script>
+</body>
+</html>
