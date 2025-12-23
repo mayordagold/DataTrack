@@ -20,7 +20,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { API } from '../config/api'
 
 const router = useRouter()
 const fullName = ref('')
@@ -29,7 +29,7 @@ const password = ref('')
 
 const register = async () => {
   try {
-    await axios.post('http://localhost:5000/api/auth/register', { fullName: fullName.value, email: email.value, password: password.value })
+    await API.post('/auth/register', { fullName: fullName.value, email: email.value, password: password.value })
     alert('Registration successful! Please login.')
     router.push('/login')
   } catch (err) {

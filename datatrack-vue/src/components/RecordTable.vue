@@ -27,14 +27,13 @@
 </template>
 
 <script setup>
-import axios from 'axios'
+import { API } from '../config/api'
 const props = defineProps({ records: { type: Array, default: () => [] } })
 const emit = defineEmits(['deleted'])
 const token = localStorage.getItem('token')
-const api = axios.create({ baseURL: 'http://localhost:5000/api' })
 
 async function del(id) {
-  await api.delete(`/records/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+  await API.delete(`/records/${id}`, { headers: { Authorization: `Bearer ${token}` } })
   emit('deleted')
 }
 </script>

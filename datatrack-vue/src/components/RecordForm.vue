@@ -10,15 +10,14 @@
 
 <script setup>
 import { reactive } from 'vue'
-import axios from 'axios'
+import { API } from '../config/api'
 
 const emit = defineEmits(['created'])
 const form = reactive({ title: '', category: '', description: '', amount: null })
 const token = localStorage.getItem('token')
-const api = axios.create({ baseURL: 'http://localhost:5000/api' })
 
 async function submit() {
-  await api.post('/records', form, { headers: { Authorization: `Bearer ${token}` } })
+  await API.post('/records', form, { headers: { Authorization: `Bearer ${token}` } })
   Object.assign(form, { title: '', category: '', description: '', amount: null })
   emit('created')
 }

@@ -10,6 +10,7 @@
 <script>
 import RecordForm from '../components/RecordForm.vue'
 import RecordTable from '../components/RecordTable.vue'
+import { API } from '../config/api'
 
 export default {
   components: { RecordForm, RecordTable },
@@ -21,25 +22,29 @@ export default {
   },
   methods: {
     async fetchRecords() {
-      const res = await fetch('http://localhost:5000/api/records', {
-        headers: { Authorization: `Bearer ${this.token}` }
-      })
-      this.records = await res.json()
+      try {
+        const res = await API.get('/records', {
+          headers: { Authorization: `Bearer ${this.token}` }
+        })
+        this.records = res.data
+      } catch (err) {
+        console.error(err)
+      }
     },
     async deleteRecord(id) {
-      await fetch(`http://localhost:5000/api/records/${id}`, {
-        method: 'DELETE',
+      await API.delete(`/records/${id}`, {
         headers: { Authorization: `Bearer ${this.token}` }
       })
       this.fetchRecords()
     },
     logout() {
       localStorage.removeItem('token')
-      window.location.href = '/' // redirect to login or home
+      localStorage.removeItem('user')
+      this.$router.push('/login')
     }
   },
   mounted() {
-    if (!this.token) window.location.href = '/'
+    if (!this.token) this.$router.push('/login')
     else this.fetchRecords()
   }
 }
