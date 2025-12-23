@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { API } from "../config/api";
 
 export default function RecordForm({ token, onRefresh }) {
   const [title, setTitle] = useState('');
@@ -10,7 +10,7 @@ export default function RecordForm({ token, onRefresh }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/records', {
+      await API.post('/records', {
         title,
         category,
         amount: parseFloat(amount),
